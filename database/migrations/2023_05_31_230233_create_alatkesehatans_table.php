@@ -13,15 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('pasiens', function (Blueprint $table) {
+        Schema::create('alatkesehatans', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->nullable();
-            $table->string('gender');
-            $table->date('date_of_birth')->nullable();
-            $table->text('address')->nullable();
-            $table->integer('weight')->nullable();
-            $table->integer('height')->nullable();
-            $table->text('complaint')->nullable();
+            $table->string('name');
+            $table->string('title');
+            $table->string('total');
             $table->timestamps();
         });
     }
@@ -33,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pasiens');
+        Schema::dropIfExists('alatkesehatans');
     }
 };

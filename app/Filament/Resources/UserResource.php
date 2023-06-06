@@ -25,8 +25,10 @@ class UserResource extends Resource
     protected static ?string $model = User::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-users';
-    protected static ?string $navigationGroup =' Admin Management'; // navigasi untuk icon admin grup
-    //protected static bool $shouldRegisterNavigation = false;
+    protected static ?string $navigationLabel = 'Data Pegawai';
+
+//    protected static ?string $navigationGroup =' Admin Management'; // navigasi untuk icon admin grup
+//    protected static bool $shouldRegisterNavigation = false;
 
     public static function form(Form $form): Form
     {
@@ -54,7 +56,7 @@ class UserResource extends Resource
                     )
                     ->label(static fn(Page $livewire): string =>
                     ($livewire instanceof EditUser) ? 'New Password' : 'Password'),
-                    
+
                 CheckboxList::make('roles')
                     ->relationship('roles','name')
                     ->columns(2)
@@ -66,7 +68,8 @@ class UserResource extends Resource
     public static function table(Table $table): Table{
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name'),
+                Tables\Columns\TextColumn::make('name')
+                ->label('Nama Pegawai'),
                 Tables\Columns\BooleanColumn::make('is_admin')
                     ->sortable()
                     ->searchable(),
@@ -90,14 +93,14 @@ class UserResource extends Resource
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             RolesRelationManager::class,
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
@@ -105,5 +108,5 @@ class UserResource extends Resource
             'create' => Pages\CreateUser::route('/create'),
             'edit' => Pages\EditUser::route('/{record}/edit'),
         ];
-    }    
+    }
 }

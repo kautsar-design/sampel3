@@ -8,6 +8,7 @@ use Filament\Widgets\BarChartWidget;
 
 class UsersChart extends BarChartWidget
 {
+    protected static ?int $sort = 3;
     protected static ?string $heading = 'Users';
 
     protected function getData(): array {
@@ -21,7 +22,7 @@ class UsersChart extends BarChartWidget
         return [
             'datasets' => [
                 [
-                    'label' => 'Users Joined',
+                    'label' => 'Pasien',
                     'data' => $quantities,
                     'backgroundColor' => [
                         'rgba(255, 99, 132, 0.2)',

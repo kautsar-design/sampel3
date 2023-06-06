@@ -22,8 +22,9 @@ class ObatResource extends Resource
 {
     protected static ?string $model = Obat::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
-
+    protected static ?string $navigationIcon = 'heroicon-o-beaker';
+    protected static ?string $navigationLabel = 'Data Obat';
+    protected static ?string $navigationGroup = 'Local';
     public static function form(Form $form): Form
     {
         return $form
@@ -31,16 +32,16 @@ class ObatResource extends Resource
                 Card::make()
                 ->schema([
                     TextInput::make('name')
-                    ->unique()
+                    ->unique(ignoreRecord:true)
                     ->required(),
                     TextInput::make('category')
-                    ->unique()
                     ->required()
                     ->datalist([
                         'syrup',
                         'tablet',
                         'pil',
-                        'kapsul'
+                        'kapsul',
+                        'salep'
                     ]),
                     TextInput::make('stock')
                     ->numeric(),
@@ -71,11 +72,11 @@ class ObatResource extends Resource
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
-    
+
     public static function getPages(): array
     {
         return [
             'index' => Pages\ManageObats::route('/'),
         ];
-    }    
+    }
 }
